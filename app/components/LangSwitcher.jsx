@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from "react";
+import { changeLanguage } from "@/lib/i18n";
 import i18n from "i18next";
 
 const languages = [
@@ -15,21 +16,34 @@ const LangSwitcher = () => {
   const [currentLang, setCurrentLang] = useState("en");
 
   useEffect(() => {
-    if (typeof window !== "undefined" && i18n) {
-      const savedLang = localStorage.getItem("language") || "en";
-      i18n.changeLanguage(savedLang);
+    if (typeof window !== "undefined") {
+      const savedLang = localStorage.getItem("language") || i18n.language;
       setCurrentLang(savedLang);
     }
   }, []);
 
-  const changeLanguage = (locale) => {
-    if (typeof window !== "undefined" && i18n) {
-      localStorage.setItem("language", locale);
-      i18n.changeLanguage(locale);
-    }
+  const handleChangeLanguage = (locale) => {
+    changeLanguage(locale);
     setCurrentLang(locale);
     setMenuOpen(false);
   };
+  
+  // useEffect(() => {
+  //   if (typeof window !== "undefined" && i18n) {
+  //     const savedLang = localStorage.getItem("language") || "en";
+  //     i18n.changeLanguage(savedLang);
+  //     setCurrentLang(savedLang);
+  //   }
+  // }, []);
+
+  // const changeLanguage = (locale) => {
+  //   if (typeof window !== "undefined" && i18n) {
+  //     localStorage.setItem("language", locale);
+  //     i18n.changeLanguage(locale);
+  //   }
+  //   setCurrentLang(locale);
+  //   setMenuOpen(false);
+  // };
 
   return (
     <div className="relative">
@@ -44,7 +58,7 @@ const LangSwitcher = () => {
           {languages.map(({ code, label, flag }) => (
             <button
               key={code}
-              onClick={() => changeLanguage(code)}
+              onClick={() => handleChangeLanguage(code)}
               className="flex w-full items-center gap-2 px-4 py-2 text-left hover:bg-light-hover dark:hover:bg-dark-hover dark:hover:text-dark-text transition duration-500 cursor-pointer"
             >
               {flag} {label}
