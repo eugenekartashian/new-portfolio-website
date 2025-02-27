@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+/* #F2C1D1 пурпурно-розовый */
+/* Мокка мусс (Mocha Mousse): #6F4E37
+Изумрудно-зелёный (Emerald Green): #046307 */
+/* оливковый #556B2F; */
+
+@theme {
+    /* Colors */
+    --color-light-hover: #f2e6c9;
+    --color-dark-hover: #2a004a;
+    --color-light-theme: #fffceb;
+    --color-dark-theme: #11001f;
+
+    --color-light-text: #4B4B4B;
+    --color-dark-text: #fffceb;
+    /* Fonts */
+    --font-family-montserrat: 'Montserrat', serif;
+    /* Box Shadows */
+    --box-shadow-black: 4px 4px 0 #000;
+    --box-shadow-white: 4px 4px 0 #fff;
+
+    /* Grid Template Columns */
+    --grid-cols-auto: repeat(auto-fit, minmax(100px, 1fr));
+    
+  }
+  
+/* Dark Theme */
+@custom-variant dark (&:where(.dark, .dark *));
+
+
+@utility shadow-black {
+    box-shadow: var(--box-shadow-black);
+}
+@utility shadow-white {
+    box-shadow: var(--box-shadow-white);
+}
+@utility grid-cols-auto {
+    grid-template-columns: var(--grid-cols-auto);
+}
